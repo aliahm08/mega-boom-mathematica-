@@ -1,0 +1,13 @@
+//This code manufactures a cycloid function, and when the ratio is set low enough at ~1.035, the radius span will be on the x-axis
+//hereby noting a cycloid on a bicycle spoke that transitionally moves forward, as well as centripetally.
+
+Manipulate[
+ With[{t = 2 Pi r}, 
+  Show[{ParametricPlot[#[s], {s, 10^-9, t}, AxesOrigin -> {0, 0}, 
+       PlotRange -> {{-1, 4 Pi + 1.1}, {-1 - 0.01, 3 + 0.01}}, 
+       Ticks -> None, ImageSize -> 450], 
+      Graphics[{Red, Circle[{t, 1}], Black, Point[{t, 1}], 
+        Line[{{t, 1}, #[t]}], Point[#[t]]}]}] &[{(# - 
+       ratio Sin[#]), (1 - ratio Cos[#])} &]], {{r, 2, "revolutions"},
+   0, 2, Appearance -> "Labeled"}, {{ratio, 2, "ratio"}, 0, 2, 
+  Appearance -> "Labeled"}]
